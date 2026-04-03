@@ -1,0 +1,6 @@
+{
+  "name": "argus-retina",
+  "version-string": "0.1.0",
+  "description": "Native security and media engine for the Argus platform.",
+  "dependencies": []
+}
