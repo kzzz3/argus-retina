@@ -128,6 +128,8 @@ Retina should help baseline WeChat-like features without taking over business lo
 - deterministic result payloads suitable for audit storage
 - optional verification routines for signed device-side artifacts
 
+See also: `docs/retina-cortex-contract.md`
+
 ## 8. Global Phase Mapping From Retina Perspective
 
 ### Pair A — Phase 1 / Phase 2
