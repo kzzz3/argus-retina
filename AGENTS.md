@@ -19,12 +19,13 @@ argus-retina/
 |------|----------|-------|
 | Build entry | `CMakeLists.txt` | Defines `argus_retina_engine` static library |
 | Configure/build presets | `CMakePresets.json` | `windows-debug`, `windows-release`, matching build presets |
-| Public API | `include/argus/retina/retina_engine.hpp` | Header surface consumed externally |
+| Public API | `include/argus/retina/retina_engine.hpp`, `include/argus/retina/retina_contract.hpp` | Header surface consumed externally |
 | Implementation | `src/retina_engine.cpp` | Private engine implementation |
 | Project intent/contracts | `docs/project-plan.md`, `docs/retina-cortex-contract.md` | Core-first and contract constraints |
 
 ## COMMANDS
 ```bash
+# On Windows, run these from a Visual Studio Developer Command Prompt or after VsDevCmd.bat initializes MSVC/Windows SDK paths.
 cmake --preset windows-debug
 cmake --build --preset build-windows-debug
 cmake --preset windows-release
@@ -34,6 +35,7 @@ cmake --build --preset build-windows-release
 ## CONVENTIONS
 - Keep this project core-first: reusable native engine logic in C++, thin adapters outside.
 - Public interface belongs under `include/argus/retina/`; implementation belongs under `src/`.
+- Keep versioned request/result contract types in `retina_contract.hpp`; keep engine lifecycle/API entry points in `retina_engine.hpp`.
 - Add dependencies only through `vcpkg.json` and only with concrete justification.
 - Preserve deterministic, typed request/result boundaries described in the docs.
 - Keep the native surface small and dependency-disciplined until a phase goal justifies expansion.
@@ -51,4 +53,5 @@ cmake --build --preset build-windows-release
 ## NOTES
 - `docs/project-plan.md` specifies C++23, CMake, vcpkg manifest mode, Windows-first setup, and future Android NDK/server-host portability.
 - `docs/retina-cortex-contract.md` is the authoritative contract guidance for versioned request/result schemas, error code rules, and security boundaries.
+- Plain shells may fail to link on Windows if `kernel32.lib` and SDK paths are unavailable; initialize the Visual Studio build environment before configuring/building.
 - Current source surface is small enough that project-root guidance is sufficient; do not split into deeper child guides yet.
