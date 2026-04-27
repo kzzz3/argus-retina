@@ -47,7 +47,7 @@ Retina becomes the hard realtime and zero-trust engine behind wearable features:
 - **language**: C++23
 - **build**: CMake
 - **package/dependency management**: vcpkg manifest mode
-- **Windows IDE target**: Visual Studio 2026
+- **Windows IDE target**: Visual Studio 2026 when the local CMake/toolchain supports that generator; otherwise use the installed Visual Studio generator reported by `cmake --help`
 - **future portability target**: Android NDK bridge and optional server-side embedding
 
 The repository should remain small and dependency-disciplined until each native dependency is justified by a concrete phase goal.
@@ -186,10 +186,8 @@ Each dependency must have:
 - no Spring Boot web handlers here
 - no direct persistence of social graph or conversation state here
 
-## 13. Immediate Next Design Tasks
+## 13. Planning and Progress Source of Truth
 
-1. expand contract tests around visual parse, audio preprocess, and secure signing request/result defaults.
-2. define JNI bridge shape for Lens without leaking engine internals.
-3. define server-host adapter shape for Cortex verification or batch tasks.
-4. record the first dependency-introduction rules and approval checklist in docs.
-5. decide whether engine version should be generated from build metadata or kept as a manually bumped release constant.
+This document is the long-form Retina product and architecture blueprint. Active checklist state, immediate tasks, verification gates, and the current risk register live in the repository-level `PLAN.md`.
+
+When architecture changes, update this blueprint. When implementation status changes, update `PLAN.md` and only mirror durable architectural conclusions here.

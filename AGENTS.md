@@ -6,6 +6,9 @@
 ## STRUCTURE
 ```text
 argus-retina/
+├── README.md
+├── PLAN.md
+├── AGENTS.md
 ├── CMakeLists.txt
 ├── CMakePresets.json
 ├── vcpkg.json
@@ -23,6 +26,7 @@ argus-retina/
 | Public API | `include/argus/retina/retina_engine.hpp`, `include/argus/retina/retina_contract.hpp` | Header surface consumed externally |
 | Implementation | `src/retina_engine.cpp` | Private engine implementation |
 | Tests | `tests/retina_contract_test.cpp` | Native contract smoke and enum/envelope regression coverage |
+| Onboarding and active plan | `README.md`, `PLAN.md` | Setup, navigation, current checklist, verification gates |
 | Project intent/contracts | `docs/project-plan.md`, `docs/retina-cortex-contract.md` | Core-first and contract constraints |
 
 ## COMMANDS
@@ -43,6 +47,14 @@ ctest --preset test-windows-release
 - Add dependencies only through `vcpkg.json` and only with concrete justification.
 - Preserve deterministic, typed request/result boundaries described in the docs.
 - Keep the native surface small and dependency-disciplined until a phase goal justifies expansion.
+
+## DOCUMENTATION WORKFLOW
+- `README.md` is the Retina onboarding guide for toolchain setup, public API navigation, and CMake/CTest commands.
+- `PLAN.md` is the active Retina task plan, risk register, and verification ledger.
+- `docs/project-plan.md` remains the long-form product/architecture blueprint; do not duplicate active checklist state there unless the blueprint itself changes.
+- `docs/retina-cortex-contract.md` remains the authoritative cross-repo contract explanation and must stay aligned with public headers.
+- For non-trivial work, update `PLAN.md` before editing and complete Modify -> Review/Evaluate -> Document -> Cleanup before marking a task done.
+- Documentation changes should accompany code changes whenever public contracts, presets, dependencies, ABI boundaries, or verification gates change.
 
 ## ANTI-PATTERNS
 - Do not turn this into a second Android app or a second cloud backend.
