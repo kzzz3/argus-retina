@@ -4,6 +4,9 @@
 
 namespace argus::retina {
 
+// Small public entry point for native capability discovery. Methods return
+// process-owned values and are noexcept so adapters can probe Retina before
+// enabling optional Lens/Cortex integrations.
 class RetinaEngine {
 public:
     [[nodiscard]] static const char* name() noexcept;
