@@ -188,8 +188,8 @@ Each dependency must have:
 
 ## 13. Immediate Next Design Tasks
 
-1. define public capability and version structs in `include/`
-2. define request/result contracts for frame filtering, audio slicing, and secure signing
-3. define JNI bridge shape for Lens without leaking engine internals
-4. define server-host adapter shape for Cortex verification or batch tasks
-5. record the first dependency-introduction rules and approval checklist in docs
+1. expand contract tests around visual parse, audio preprocess, and secure signing request/result defaults.
+2. define JNI bridge shape for Lens without leaking engine internals.
+3. define server-host adapter shape for Cortex verification or batch tasks.
+4. record the first dependency-introduction rules and approval checklist in docs.
+5. decide whether engine version should be generated from build metadata or kept as a manually bumped release constant.

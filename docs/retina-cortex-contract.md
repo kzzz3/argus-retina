@@ -56,20 +56,15 @@ Purpose: let Cortex negotiate what this Retina build can safely do.
 ## 4.2 QR / Visual Parse Job
 
 ### Request fields
-- `jobId`
-- `requestTimestamp`
+- common envelope: `jobId`, `contractVersion`, `traceId`, `requestedAt`, `requester`
 - `inputType`
 - `assetReference`
 - `expectedFormat`
-- `traceId`
 
 ### Response fields
-- `jobId`
-- `status`
+- common envelope: `jobId`, `contractVersion`, `completedAt`, `status`, `errorCode`, `errorMessage`
 - `parsedPayload`
 - `confidence`
-- `errorCode`
-- `errorMessage`
 - `evidenceReferences[]`
 
 ---
@@ -77,41 +72,33 @@ Purpose: let Cortex negotiate what this Retina build can safely do.
 ## 4.3 Audio Preprocess / VAD Job
 
 ### Request fields
-- `jobId`
+- common envelope: `jobId`, `contractVersion`, `traceId`, `requestedAt`, `requester`
 - `assetReference`
 - `sampleRateHz`
 - `channelCount`
 - `segmentPolicy`
-- `traceId`
 
 ### Response fields
-- `jobId`
-- `status`
+- common envelope: `jobId`, `contractVersion`, `completedAt`, `status`, `errorCode`, `errorMessage`
 - `segmentRanges[]`
 - `vadScore`
 - `recommendedUpload`
-- `errorCode`
-- `errorMessage`
 
 ---
 
 ## 4.4 Secure Signing / Payment Support Job
 
 ### Request fields
-- `jobId`
+- common envelope: `jobId`, `contractVersion`, `traceId`, `requestedAt`, `requester`
 - `operationType`
 - `canonicalPayload`
 - `payloadHash`
-- `traceId`
 
 ### Response fields
-- `jobId`
-- `status`
+- common envelope: `jobId`, `contractVersion`, `completedAt`, `status`, `errorCode`, `errorMessage`
 - `artifactType`
 - `artifactReference`
 - `signatureMetadata`
-- `errorCode`
-- `errorMessage`
 
 Rules:
 - return trusted artifacts only
@@ -173,13 +160,14 @@ Every Retina-facing contract should use the same top-level metadata envelope.
 
 ## 9. Near-Term Implementation Checklist
 
-- [ ] define shared envelope structs in Retina headers
-- [ ] define capability probe contract payload
-- [ ] define QR/visual parse request/result structs
-- [ ] define audio preprocess/VAD request/result structs
-- [ ] define secure signing artifact request/result structs
-- [ ] define shared error code families
-- [ ] define contract version negotiation behavior
+- [x] define shared envelope structs in Retina headers
+- [x] define capability probe contract payload
+- [x] define QR/visual parse request/result structs
+- [x] define audio preprocess/VAD request/result structs
+- [x] define secure signing artifact request/result structs
+- [x] define shared error code families
+- [x] define baseline contract version constants and early-rejection fields
+- [ ] implement active runtime negotiation/rejection behavior in adapters
 
 ---
 
