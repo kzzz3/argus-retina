@@ -11,16 +11,18 @@ argus-retina/
 ├── vcpkg.json
 ├── include/argus/retina/
 ├── src/
+├── tests/
 └── docs/
 ```
 
 ## WHERE TO LOOK
 | Task | Location | Notes |
 |------|----------|-------|
-| Build entry | `CMakeLists.txt` | Defines `argus_retina_engine` static library |
-| Configure/build presets | `CMakePresets.json` | `windows-debug`, `windows-release`, matching build presets |
+| Build entry | `CMakeLists.txt` | Defines `argus_retina_engine` static library and CTest-backed contract test |
+| Configure/build/test presets | `CMakePresets.json` | `windows-debug`, `windows-release`, matching build presets, and test presets |
 | Public API | `include/argus/retina/retina_engine.hpp`, `include/argus/retina/retina_contract.hpp` | Header surface consumed externally |
 | Implementation | `src/retina_engine.cpp` | Private engine implementation |
+| Tests | `tests/retina_contract_test.cpp` | Native contract smoke and enum/envelope regression coverage |
 | Project intent/contracts | `docs/project-plan.md`, `docs/retina-cortex-contract.md` | Core-first and contract constraints |
 
 ## COMMANDS
@@ -28,8 +30,10 @@ argus-retina/
 # On Windows, run these from a Visual Studio Developer Command Prompt or after VsDevCmd.bat initializes MSVC/Windows SDK paths.
 cmake --preset windows-debug
 cmake --build --preset build-windows-debug
+ctest --preset test-windows-debug
 cmake --preset windows-release
 cmake --build --preset build-windows-release
+ctest --preset test-windows-release
 ```
 
 ## CONVENTIONS
@@ -47,8 +51,8 @@ cmake --build --preset build-windows-release
 - Do not blur the boundary between public API (`include/`) and implementation (`src/`).
 
 ## TESTING
-- No explicit test target or test harness was found in the current CMake project.
-- If adding tests later, document the harness clearly rather than implying one already exists.
+- `CMakeLists.txt` registers `argus_retina_contract_test` through CTest when `BUILD_TESTING` is enabled.
+- Prefer the preset flow above when Ninja and `VCPKG_ROOT` are available. In plain shells without Ninja/vcpkg, configure with the Visual Studio generator and run `ctest --test-dir <build-dir> -C Debug --output-on-failure`.
 
 ## NOTES
 - `docs/project-plan.md` specifies C++23, CMake, vcpkg manifest mode, Windows-first setup, and future Android NDK/server-host portability.
